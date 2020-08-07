@@ -4,8 +4,8 @@
   "description": "Webcomponent whatsapp-button snapbot-button following open-wc recommendations",
   "author": "Murillo G Zampieri",
   "license": "MIT",
-  "main": "lib/Snapbot-Button.js",
-  "module": "lib/Snapbot-Button.js",
+  "main": "lib/SnapbotButton.js",
+  "module": "lib/SnapbotButton.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/murillozampieri/whatsapp-button.git"
