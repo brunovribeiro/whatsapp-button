@@ -1,14 +1,14 @@
 {
-  "name": "@open-wa/whatsapp-button",
-  "version": "3.1.1",
-  "description": "Webcomponent whatsapp-button following open-wc recommendations",
-  "author": "Mohammed Shah <@smashah>",
+  "name": "@snapbot/whatsapp-widget",
+  "version": "0.0.1",
+  "description": "Webcomponent whatsapp-button snapbot-button following open-wc recommendations",
+  "author": "Murillo G Zampieri",
   "license": "MIT",
-  "main": "lib/WhatsappButton.js",
-  "module": "lib/WhatsappButton.js",
+  "main": "lib/Snapbot-Button.js",
+  "module": "lib/Snapbot-Button.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/smashah/whatsapp-button.git"
+    "url": "git+https://github.com/murillozampieri/whatsapp-button.git"
   },
   "publishConfig": {
     "access": "public"
@@ -72,5 +72,17 @@
       "prettier --write",
       "git add"
     ]
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/murillozampieri/whatsapp-button/issues"
+  },
+  "homepage": "https://github.com/murillozampieri/whatsapp-button#readme",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "keywords": [
+    "whatsapp-button",
+    "snapbot"
+  ]
 }

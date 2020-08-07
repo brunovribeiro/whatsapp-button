@@ -1,1 +1,1 @@
-export { WhatsappButton } from './lib/WhatsappButton.js';
+export { SnapbotButton } from './lib/SnapbotButton.js';

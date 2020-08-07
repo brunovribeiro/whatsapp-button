@@ -11,17 +11,7 @@
 </head>
 <body>
   <div id="demo"></div>
-  <script type="module">
-    import { html, render } from 'lit-html';
-    import '../whatsapp-button.js';
-
-    render(
-      html`
-        <whatsapp-button phone="7712345678" dialcode="44" text="hey there lets chat!" label="Let's Talk" bypass responsive>
-        </whatsapp-button>
-      `,
-      document.querySelector('#demo')
-    );
-  </script>
+  <script type="module" src="../snapbot-button.js"></script>
+  <snapbot-button hash="2b1d389d14ff272c6f1a2046827ba4b8"></snapbot-button>
 </body>
 </html>
