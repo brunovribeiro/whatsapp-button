@@ -263,8 +263,10 @@ class SnapbotButton extends LitElement {
       this.icon = data.data.configuration.icon;
     this.accountNumber = data.data.account_number;
     
-    let butt = this.shadowRoot?.getElementById('icon-wpp');
-    this.__fadeIn(butt,1);
+    if(this.shadowRoot) {
+      let butt = this.shadowRoot.getElementById('icon-wpp');
+      this.__fadeIn(butt,1);
+    }
   }
 
   async getLinkToRedirect() {
@@ -305,9 +307,11 @@ class SnapbotButton extends LitElement {
   __clickIcon(event: any) {
     switch(this.type) {
       case 'full':
-        let form = this.shadowRoot?.getElementById('container-snapbot');
-        this.__fadeOut(event.target, 0.5);
-        this.__openForm(form,1);
+        if(this.shadowRoot) {
+          let form = this.shadowRoot.getElementById('container-snapbot');
+          this.__fadeOut(event.target, 0.5);
+          this.__openForm(form,1);
+        }
         break;
       case 'basic':
         this.getLinkToRedirect();
@@ -316,17 +320,21 @@ class SnapbotButton extends LitElement {
   }
 
   __sendForm() {
-    let icon = this.shadowRoot?.getElementById('icon-wpp');
-    let form = this.shadowRoot?.getElementById('container-snapbot');
-    this.__fadeIn(icon, 0.5);
-    this.__closeForm(form,1);
+    if(this.shadowRoot) {
+      let icon = this.shadowRoot.getElementById('icon-wpp');
+      let form = this.shadowRoot.getElementById('container-snapbot');
+      this.__fadeIn(icon, 0.5);
+      this.__closeForm(form,1);
+    }
   }
 
   __cancelForm() {
-    let icon = this.shadowRoot?.getElementById('icon-wpp');
-    let form = this.shadowRoot?.getElementById('container-snapbot');
-    this.__closeForm(form,0.5);
-    this.__fadeIn(icon, 1);
+    if(this.shadowRoot) {
+      let icon = this.shadowRoot.getElementById('icon-wpp');
+      let form = this.shadowRoot.getElementById('container-snapbot');
+      this.__closeForm(form,0.5);
+      this.__fadeIn(icon, 1);
+    }
   }
   
   __openForm(form: any,time = 0.5) {
