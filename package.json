@@ -1,6 +1,6 @@
 {
   "name": "@snapbot/whatsapp-widget",
-  "version": "0.0.1",
+  "version": "0.0.1-beta",
   "description": "Webcomponent whatsapp-button snapbot-button following open-wc recommendations",
   "author": "Murillo G Zampieri",
   "license": "MIT",
