@@ -8,6 +8,8 @@ class SnapbotButton extends LitElement {
   @property({type: String}) hash = '';
   @property({type: String}) title = 'Estamos online!';
   @property({type: String}) message = 'Fala com o nosso robô';
+  @property({type: String}) titleFeedback = 'Verifique seu WhatsApp!';
+  @property({type: String}) messageFeedback = 'Já vamos te chamar por lá...';
   @property({type: String}) type = 'full';
   @property({type: String}) button = 'INICIAR ATENDIMENTO';
   @property({type: String}) textCancel = 'Não quero falar pelo WhatsApp!';
@@ -221,7 +223,7 @@ class SnapbotButton extends LitElement {
             <form @submit="${this.__submit}" action="post">
               <input name="name" type="text" id="name-snapbot" placeholder="Nome" required>
               <input name="phone" @keyup="${this.__mascara}" maxlength="15" type="tel" pattern="[(][0-9]{2}[)][ ][0-9]{4}[-][0-9]{4,}" name="phonenumber-snapbot" placeholder="(99) 99999-9999" required>
-              <button @submit="${this.__sendForm}" id="action-snapbot" class="shadow">${this.button}</button>
+              <button id="action-snapbot" class="shadow">${this.button}</button>
             </form>
             <div id="output-snapbot">
               <hr>
@@ -236,7 +238,6 @@ class SnapbotButton extends LitElement {
     this.loadConfig();
   }
 
-  
   async loadConfig() {
     let result:any = await fetch(`${config.baseUrl}/widget/load`, {
       method: 'get',
@@ -261,6 +262,10 @@ class SnapbotButton extends LitElement {
       this.textCancel = data.data.configuration.textCancel;
     if(typeof data.data.configuration.icon != 'undefined')
       this.icon = data.data.configuration.icon;
+    if(typeof data.data.configuration.titleFeedback != 'undefined')
+      this.titleFeedback = data.data.configuration.titleFeedback;
+    if(typeof data.data.configuration.messageFeedback != 'undefined')
+      this.titleFeedback = data.data.configuration.messageFeedback;
     this.accountNumber = data.data.account_number;
     
     if(this.shadowRoot) {
@@ -300,8 +305,8 @@ class SnapbotButton extends LitElement {
       return;
     });
 
-    let data = await result.json();
-    console.log(data);
+    await result.json();
+    this.__sendForm();
   }
 
   __clickIcon(event: any) {
@@ -310,7 +315,7 @@ class SnapbotButton extends LitElement {
         if(this.shadowRoot) {
           let form = this.shadowRoot.getElementById('container-snapbot');
           this.__fadeOut(event.target, 0.5);
-          this.__openForm(form,1);
+          this.__openForm(form,2);
         }
         break;
       case 'basic':
@@ -321,10 +326,29 @@ class SnapbotButton extends LitElement {
 
   __sendForm() {
     if(this.shadowRoot) {
-      let icon = this.shadowRoot.getElementById('icon-wpp');
       let form = this.shadowRoot.getElementById('container-snapbot');
-      this.__fadeIn(icon, 0.5);
-      this.__closeForm(form,1);
+      this.__closeForm(form, 1.5, 0,-305);
+      
+      let title = this.shadowRoot.getElementById('titulo-snapbot');
+      let message = this.shadowRoot.getElementById('mensagem-snapbot');
+      if(title) {
+        this.__fadeOut(title, 0.5);
+        title.innerHTML = this.titleFeedback;
+        setTimeout(() => {
+          this.__fadeIn(title,0.5);
+        },500);
+      }
+      if(message) {
+        this.__fadeOut(message, 0.5);
+        message.innerHTML = this.messageFeedback;
+        setTimeout(() => {
+          this.__fadeIn(message,0.5);
+        },500);
+      }
+      
+      setTimeout(() => {
+        this.__closeForm(form, 1.5, -305,-500);
+      },3000)
     }
   }
 
@@ -337,24 +361,28 @@ class SnapbotButton extends LitElement {
     }
   }
   
-  __openForm(form: any,time = 0.5) {
+  __openForm(form: any,time = 0.5, startBottom = -500, endBottom = 0) {
     this.__fadeIn(form, time);
-    setTimeout(() => {
-      form.style.bottom = 0;
-    },500) 
+    let timeByIncrement = ((startBottom-endBottom)/10)/time;
+    let intervalo = setInterval(function(){
+      if(startBottom >= endBottom){
+        clearInterval(intervalo);
+      }else {
+        startBottom += 10;
+        form.style.bottom = `${startBottom}px`;
+      }
+    },timeByIncrement);
   }
 
-  __closeForm(form: any,time = 0.5) {
-    this.__fadeOut(form, time);
-    let timeByIncrement = (500/10)/time;
-
-    let startBottom = 0;
-    let endBottom = -500;
+  __closeForm(form: any,time = 0.5, startBottom = 0, endBottom = -500) {
+    let timeByIncrement = ((startBottom-endBottom)/10)/time;
     let intervalo = setInterval(function(){
       if(startBottom <= endBottom){
         clearInterval(intervalo);
       }else {
-        form.style.bottom -= 10;
+        startBottom -= 10;
+        form.style.bottom = `${startBottom}px`;
+        console.log(form.style.bottom);
       }
     },timeByIncrement);
   }
@@ -406,7 +434,21 @@ class SnapbotButton extends LitElement {
 
   __submit(event: MouseEvent) {
     event.preventDefault();
+    if(this.shadowRoot){
+      let btn = this.shadowRoot.getElementById('action-snapbot');
+      if(btn)
+        this.disabledElement(btn);
+    }
+    
     this.sendForm(event.target);
+  }
+
+  disabledElement(element: any) {
+    element.disabled = true;
+  }
+
+  enbledElement(element: any) {
+    element.disabled = false;
   }
 
 }
