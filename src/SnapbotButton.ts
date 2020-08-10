@@ -62,7 +62,8 @@ class SnapbotButton extends LitElement {
       box-shadow: -1px 2px 33px -2px rgba(0,0,0,0.41);
       border-top-right-radius: 30px;
       border-top-left-radius: 30px;
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Roboto', sans-serif !important;
+      font-weight: 500;
     }
     #container-snapbot #header-snapbot{
       height: 7%;
@@ -227,7 +228,7 @@ class SnapbotButton extends LitElement {
             </form>
             <div id="output-snapbot">
               <hr>
-              <p @click="${this.__cancelForm}" id="text-output-snapbot">Não quero falar pelo WhatsApp.</p>
+              <p @click="${this.__cancelForm}" id="text-output-snapbot">${this.textCancel}</p>
             </div>
         </div>
       </div>
@@ -265,7 +266,7 @@ class SnapbotButton extends LitElement {
     if(typeof data.data.configuration.titleFeedback != 'undefined')
       this.titleFeedback = data.data.configuration.titleFeedback;
     if(typeof data.data.configuration.messageFeedback != 'undefined')
-      this.titleFeedback = data.data.configuration.messageFeedback;
+      this.messageFeedback = data.data.configuration.messageFeedback;
     this.accountNumber = data.data.account_number;
     
     if(this.shadowRoot) {
@@ -315,7 +316,7 @@ class SnapbotButton extends LitElement {
         if(this.shadowRoot) {
           let form = this.shadowRoot.getElementById('container-snapbot');
           this.__fadeOut(event.target, 0.5);
-          this.__openForm(form,2);
+          this.__openForm(form,0.5);
         }
         break;
       case 'basic':
@@ -327,7 +328,7 @@ class SnapbotButton extends LitElement {
   __sendForm() {
     if(this.shadowRoot) {
       let form = this.shadowRoot.getElementById('container-snapbot');
-      this.__closeForm(form, 1.5, 0,-305);
+      this.__closeForm(form, 0.5, 0,-305);
       
       let title = this.shadowRoot.getElementById('titulo-snapbot');
       let message = this.shadowRoot.getElementById('mensagem-snapbot');
@@ -347,7 +348,7 @@ class SnapbotButton extends LitElement {
       }
       
       setTimeout(() => {
-        this.__closeForm(form, 1.5, -305,-500);
+        this.__closeForm(form, 1, -305,-500);
       },3000)
     }
   }
@@ -356,14 +357,18 @@ class SnapbotButton extends LitElement {
     if(this.shadowRoot) {
       let icon = this.shadowRoot.getElementById('icon-wpp');
       let form = this.shadowRoot.getElementById('container-snapbot');
-      this.__closeForm(form,0.5);
-      this.__fadeIn(icon, 1);
+      this.__closeForm(form,0.2);
+      this.__fadeIn(icon, 0.5);
     }
   }
   
   __openForm(form: any,time = 0.5, startBottom = -500, endBottom = 0) {
     this.__fadeIn(form, time);
-    let timeByIncrement = ((startBottom-endBottom)/10)/time;
+    let diff = startBottom-endBottom;
+    if(diff < 0)
+      diff *= -1;
+    
+    let timeByIncrement = ((1000*time)/diff)*10;
     let intervalo = setInterval(function(){
       if(startBottom >= endBottom){
         clearInterval(intervalo);
@@ -375,14 +380,18 @@ class SnapbotButton extends LitElement {
   }
 
   __closeForm(form: any,time = 0.5, startBottom = 0, endBottom = -500) {
-    let timeByIncrement = ((startBottom-endBottom)/10)/time;
+    let diff = startBottom-endBottom;
+    if(diff < 0)
+      diff *= -1;
+    
+    let timeByIncrement = ((1000*time)/diff)*10;
+    
     let intervalo = setInterval(function(){
       if(startBottom <= endBottom){
         clearInterval(intervalo);
       }else {
-        startBottom -= 10;
+        startBottom -= 10
         form.style.bottom = `${startBottom}px`;
-        console.log(form.style.bottom);
       }
     },timeByIncrement);
   }
