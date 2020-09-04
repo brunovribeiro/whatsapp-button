@@ -2,6 +2,7 @@ import { LitElement } from 'lit-element';
 declare class SnapbotButton extends LitElement {
     icon: string;
     hash: string;
+    preview: boolean;
     title: string;
     message: string;
     titleFeedback: string;
@@ -15,6 +16,7 @@ declare class SnapbotButton extends LitElement {
     constructor();
     render(): import("lit-element").TemplateResult;
     firstUpdated(): void;
+    loadPreview(): void;
     loadConfig(): Promise<void>;
     getLinkToRedirect(): Promise<void>;
     sendForm(form: any): Promise<void>;
@@ -29,6 +31,7 @@ declare class SnapbotButton extends LitElement {
     __mascara(event: any): void;
     __telefone(element: any): any;
     __submit(event: MouseEvent): void;
+    previewSend(): void;
     disabledElement(element: any): void;
     enbledElement(element: any): void;
 }
