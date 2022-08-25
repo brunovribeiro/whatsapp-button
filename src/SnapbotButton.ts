@@ -280,7 +280,7 @@ class SnapbotButton extends LitElement {
   }
 
   async loadConfig() {
-    let result:any = await fetch(`${config.baseUrl}/widget/load`, {
+    let result: any = await fetch(`${config.baseUrl}/widget/load`, {
       method: 'get',
       headers:{
         'X-HASH-Widget':this.hash,
@@ -288,6 +288,7 @@ class SnapbotButton extends LitElement {
       }
     }).catch((err) => {
       console.log(err);
+      throw new Error('Domínio não permitido');
     });
 
     let data = await result.json();
