@@ -236,7 +236,7 @@ class SnapbotButton extends LitElement {
       <img id="icon-wpp" @click="${this.__clickIcon}" src="${this.icon}" 
         class="snapbot-whtasapp-icon" 
         width="90px" 
-        style="opacity: 0 ${this.styleClassSnapbotWhtasappIcon}"
+        style="opacity: 0; ${this.styleClassSnapbotWhtasappIcon}"
       >
 
       <div id="container-snapbot" style="${this.styleClassContainerSnapbot}">
