@@ -1,14 +1,14 @@
 {
   "name": "@snapbot/whatsapp-widget",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Webcomponent whatsapp-button snapbot-button following open-wc recommendations",
-  "author": "Murillo G Zampieri",
+  "author": "Mohammed",
   "license": "MIT",
   "main": "lib/SnapbotButton.js",
   "module": "lib/SnapbotButton.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/murillozampieri/whatsapp-button.git"
+    "url": "git+https://github.com/brunovribeiro/whatsapp-button.git"
   },
   "publishConfig": {
     "access": "public"
@@ -74,9 +74,9 @@
     ]
   },
   "bugs": {
-    "url": "https://github.com/murillozampieri/whatsapp-button/issues"
+    "url": "https://github.com/brunovribeiro/whatsapp-button/issues"
   },
-  "homepage": "https://github.com/murillozampieri/whatsapp-button#readme",
+  "homepage": "https://github.com/brunovribeiro/whatsapp-button#readme",
   "directories": {
     "lib": "lib",
     "test": "test"
