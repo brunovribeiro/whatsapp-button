@@ -282,9 +282,10 @@ class SnapbotButton extends LitElement {
   async loadConfig() {
     const result: any = await fetch(`${config.baseUrl}/widget/load`, {
       method: 'get',
-      headers:{
-        'X-HASH-Widget':this.hash,
-        'Accept':'application/json'
+      headers: {
+        'X-HASH-Widget': this.hash,
+        'X-Full-Origin': window.location.href,
+        'Accept': 'application/json'
       }
     }).then(response => {
       if (response.status === 403) {
@@ -398,8 +399,9 @@ class SnapbotButton extends LitElement {
     let result:any = await fetch(`${config.baseUrl}${config.linkRedirect}`, {
       method: 'get',
       headers:{
-        'X-HASH-Widget':this.hash,
-        'Accept':'application/json'
+        'X-HASH-Widget': this.hash,
+        'X-Full-Origin': window.location.href,
+        'Accept': 'application/json'
       }
     }).catch((err) => {
       console.log(err);
@@ -416,8 +418,9 @@ class SnapbotButton extends LitElement {
     let result:any = await fetch(`${config.baseUrl}${config.linkActive}`, {
       method: 'post',
       headers:{
-        'X-HASH-Widget':this.hash,
-        'Accept':'application/json'
+        'X-HASH-Widget': this.hash,
+        'X-Full-Origin': window.location.href,
+        'Accept': 'application/json'
       },
       body:formData
     }).catch((err) => {
