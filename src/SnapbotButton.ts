@@ -301,8 +301,9 @@ class SnapbotButton extends LitElement {
       
       return response;
     }).catch((err) => {
-      console.log(err);
-    });;
+      console.error(err);
+      return;
+    });
 
     const data = await result.json();
 
