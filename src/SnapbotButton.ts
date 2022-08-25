@@ -301,6 +301,12 @@ class SnapbotButton extends LitElement {
       
       return response;
     }).catch((err) => {
+      const buttonElements = document.getElementsByTagName('snapbot-button');
+
+      Array.from(buttonElements).forEach(button => {
+        button.remove();
+      });
+      
       return Promise.reject(err);
     });
 
