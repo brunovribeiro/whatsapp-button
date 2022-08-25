@@ -1,6 +1,6 @@
 {
   "name": "@snapbot/whatsapp-widget",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Webcomponent whatsapp-button snapbot-button following open-wc recommendations",
   "author": "Mohammed",
   "license": "MIT",
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
+    "start": "tsc && es-dev-server --app-index demo/index.html --node-resolve --open --watch",
     "lint:eslint": "eslint --ext .ts,.html . --ignore-path .prettierignore ",
     "format:eslint": "eslint --ext .ts,.html . --fix --ignore-path .prettierignore  ",
     "lint:prettier": "prettier \"**/*.ts\" --check --ignore-path .prettierignore ",

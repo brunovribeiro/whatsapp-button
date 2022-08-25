@@ -9,3 +9,8 @@ Como publicar?
 - Execute `npm login` e insira suas credenciais do https://www.npmjs.com/; (Somente na primeira vez).
 
 - Execute `npm publish`. (Prestar atenção na saída do comando para ver se não deu erro);
+
+Para testar localhost: 
+    - Substitua a hash da tag `<snapbot-button>`, em `/demo/index.html`, pelo que deseja testar.
+    - Em `/src/_config.ts` troque a `baseUrl` para seu local host.
+    - Execute `npm start` para iniciar o projeto e abrir o navegador.
